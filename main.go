@@ -20,11 +20,9 @@ type DbEvent struct {
 	DocumentKey     documentKey     `bson:"documentKey"`
     OperationType    string                   `bson:"operationType"`
 }
-
 type documentKey struct {
 	ID      primitive.ObjectID      `bson:"_id"`
 }
-
 type result struct {
     ID               primitive.ObjectID       `bson:"_id"`
     UserID        string                            `bson:"userID"`
@@ -117,7 +115,7 @@ func main(){
 func insertRecord(collection *mongo.Collection) {
         // pre-populated values for DeviceType and GameState    
         DeviceType := make([]string, 0)
-        DeviceType = append(DeviceType, "mobile","laptop","burr-board","tablet","desktop","smart-watch")
+        DeviceType = append(DeviceType, "mobile","laptop","karan-board","tablet","desktop","smart-watch")
         GameState := make([]string, 0)
         GameState = append(GameState, "playing","paused","stopped","finished","failed")
 
@@ -137,3 +135,4 @@ func insertRecord(collection *mongo.Collection) {
             time.Sleep(5 * time.Second)
         }
     }
+    
