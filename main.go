@@ -83,7 +83,7 @@ func main(){
     defer client.Disconnect(context.TODO())
 
     // set Mongodb database and collection name
-    database := client.Database("summit-demo")
+    database := client.Database("change-stream-demo")
     collection := database.Collection("bike-factory")
 
     /* Create a change stream to listen to changes in the bike-factory collection
