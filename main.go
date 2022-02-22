@@ -17,7 +17,7 @@ import (
 )
 
 type DbEvent struct {
-	DocumentKey   documentKey `bson:"documentKey"`
+	DocumentKey                    documentKey                            `bson:"documentKey"`
 	OperationType string      `bson:"operationType"`
 }
 type documentKey struct {
