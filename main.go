@@ -17,7 +17,7 @@ import (
 )
 
 type DbEvent struct {
-	DocumentKey                    documentKey                            `bson:"documentKey"`
+	DocumentKey   documentKey `bson:"documentKey"`
 	OperationType string      `bson:"operationType"`
 }
 type documentKey struct {
@@ -30,7 +30,12 @@ type result struct {
 	GameState  string             `bson:"gameState"`
 }
 
-func listenToDBChangeStream(routineCtx context.Context, waitGroup sync.WaitGroup, stream *mongo.ChangeStream, collection *mongo.Collection) {
+func listenToDBChangeStream(
+	routineCtx context.Context,
+	waitGroup sync.WaitGroup,
+	stream *mongo.ChangeStream,
+	collection *mongo.Collection,
+) {
 	// Cleanup defer functions when this function exits
 	defer stream.Close(routineCtx)
 	// Wrap the worker call in a closure that makes sure to tell the WaitGroup that this worker is done
@@ -75,7 +80,10 @@ func main() {
 	var waitGroup sync.WaitGroup
 
 	// Set client options and connect to MongoDB
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("MONGODB_URI")))
+	client, err := mongo.Connect(
+		context.TODO(),
+		options.Client().ApplyURI(os.Getenv("MONGODB_URI")),
+	)
 	if err != nil {
 		panic(err)
 	}
@@ -115,7 +123,15 @@ func main() {
 func insertRecord(collection *mongo.Collection) {
 	// pre-populated values for DeviceType and GameState
 	DeviceType := make([]string, 0)
-	DeviceType = append(DeviceType, "mobile", "laptop", "karan-board", "tablet", "desktop", "smart-watch")
+	DeviceType = append(
+		DeviceType,
+		"mobile",
+		"laptop",
+		"karan-board",
+		"tablet",
+		"desktop",
+		"smart-watch",
+	)
 	GameState := make([]string, 0)
 	GameState = append(GameState, "playing", "paused", "stopped", "finished", "failed")
 
